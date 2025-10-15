@@ -135,7 +135,8 @@ until ($start > (length($sequence)))
 	while ($tmp =~ /[GC]/g) {$count++}
 	while ($tmp =~ /[C]/g) {$countC++} #GC_deviation
 	while ($tmp =~ /[G]/g) {$countG++} #GC_deviation
-	my $gcdev = ($countG-$countC)/($countG+$countC) ; #GC_deviation
+	my $gcdev;
+	if(($countG+$countC) > 0){$gcdev = ($countG-$countC)/($countG+$countC)}else{ $gcdev = 0 } ; #GC_deviation
 	#print LOG $count . " " . $tmp . "\n";
 	my $pcent =  $count / $window ;
 	$h_pcent{$position} = $pcent;
